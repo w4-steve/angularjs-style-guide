@@ -3,45 +3,22 @@
 # Introduction
 
 The goal of this style guide is to present a set of best practices and style guidelines for one AngularJS application.
-These best practices are collected from:
-
-0. AngularJS source code
-0. Source code or articles I've read
-0. My own experience
 
 **Note 1**: this is still a draft of the style guide, its main goal is to be community-driven so filling the gaps will be greatly appreciated by the whole community.
 
 **Note 2**: before following any of the guidelines in the translations of the English document, make sure they are up-to date. The latest version of the AngularJS style guide is in the current document.
 
+**Note 3**: this is forked from [AngularJS styleguide](https://github.com/mgechev/angularjs-style-guide)
+
 In this style guide you won't find common guidelines for JavaScript development. Such can be found at:
 
-0. [Google's JavaScript style guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml)
-0. [Mozilla's JavaScript style guide](https://developer.mozilla.org/en-US/docs/Developer_Guide/Coding_Style)
-0. [GitHub's JavaScript style guide](https://github.com/styleguide/javascript)
-0. [Douglas Crockford's JavaScript style guide](http://javascript.crockford.com/code.html)
-0. [Airbnb JavaScript style guide](https://github.com/airbnb/javascript)
-0. [Idiomatic JavaScript style guide](https://github.com/rwaldron/idiomatic.js/)
-
-For AngularJS development recommended is the [Google's JavaScript style guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml).
+0. [Gabe JavaScript style guide](https://github.com/w4-steve/javascript)
 
 In AngularJS's GitHub wiki there is a similar section by [ProLoser](https://github.com/ProLoser), you can check it [here](https://github.com/angular/angular.js/wiki).
 
 # Translations
 
-- [German](https://github.com/mgechev/angularjs-style-guide/blob/master/README-de-de.md)
-- [Spanish](https://github.com/mgechev/angularjs-style-guide/blob/master/README-es-es.md)
-- [French](https://github.com/mgechev/angularjs-style-guide/blob/master/README-fr-fr.md)
-- [Indonesian](https://github.com/mgechev/angularjs-style-guide/blob/master/README-id-id.md)
-- [Italian](https://github.com/mgechev/angularjs-style-guide/blob/master/README-it-it.md)
-- [Japanese](https://github.com/mgechev/angularjs-style-guide/blob/master/README-ja-jp.md)
-- [Korean](https://github.com/mgechev/angularjs-style-guide/blob/master/README-ko-kr.md)
-- [Polish](https://github.com/mgechev/angularjs-style-guide/blob/master/README-pl-pl.md)
-- [Portuguese](https://github.com/mgechev/angularjs-style-guide/blob/master/README-pt-br.md)
-- [Russian](https://github.com/mgechev/angularjs-style-guide/blob/master/README-ru-ru.md)
-- [Serbian](https://github.com/mgechev/angularjs-style-guide/blob/master/README-sr.md)
-- [Serbian lat](https://github.com/mgechev/angularjs-style-guide/blob/master/README-sr-lat.md)
-- [Chinese](https://github.com/mgechev/angularjs-style-guide/blob/master/README-zh-cn.md)
-- [Turkish](https://github.com/mgechev/angularjs-style-guide/blob/master/README-tr-tr.md)
+- [Korean](https://github.com/w4-steve/angularjs-style-guide/blob/master/README-ko-kr.md)
 
 # Table of content
 * [General](#general)
@@ -66,43 +43,6 @@ In AngularJS's GitHub wiki there is a similar section by [ProLoser](https://gith
 ## Directory structure
 
 Since a large AngularJS application has many components it's best to structure it in a directory hierarchy.
-There are two main approaches:
-
-* Creating high-level divisions by component types and lower-level divisions by functionality.
-
-In this way the directory structure will look like:
-
-```
-.
-├── app
-│   ├── app.js
-│   ├── controllers
-│   │   ├── home
-│   │   │   ├── FirstCtrl.js
-│   │   │   └── SecondCtrl.js
-│   │   └── about
-│   │       └── ThirdCtrl.js
-│   ├── directives
-│   │   ├── home
-│   │   │   └── directive1.js
-│   │   └── about
-│   │       ├── directive2.js
-│   │       └── directive3.js
-│   ├── filters
-│   │   ├── home
-│   │   └── about
-│   └── services
-│       ├── CommonService.js
-│       ├── cache
-│       │   ├── Cache1.js
-│       │   └── Cache2.js
-│       └── models
-│           ├── Model1.js
-│           └── Model2.js
-├── partials
-├── lib
-└── test
-```
 
 * Creating high-level divisions by functionality and lower-level divisions by component types.
 
@@ -250,14 +190,11 @@ This will make your testing easier and in some cases prevent unexpected behaviou
 
 * Automate your workflow using tools like:
     * [NPM](https://www.npmjs.com/)
-    * [Grunt](http://gruntjs.com)
-    * [Gulp](http://gulpjs.com)
-    * [Yeoman](http://yeoman.io)
-    * [Bower](http://bower.io)
+    * [webpack](https://webpack.github.io/)
 
 
 * Use promises (`$q`) instead of callbacks. It will make your code look more elegant and clean, and save you from callback hell.
-* Use `$resource` instead of `$http` when possible. The higher level of abstraction will save you from redundancy.
+* Use [$resource](https://docs.angularjs.org/api/ngResource/service/$resource) instead of `$http` when possible. The higher level of abstraction will save you from redundancy.
 * Use an AngularJS pre-minifier ([ng-annotate](https://github.com/olov/ng-annotate)) for preventing problems after minification.
 * Don't use globals. Resolve all dependencies using Dependency Injection, this will prevent bugs and monkey patching when testing.
 * Avoid globals by using Grunt/Gulp to wrap your code in Immediately Invoked Function Expression (IIFE). You can use plugins like [grunt-wrap](https://www.npmjs.com/package/grunt-wrap) or [gulp-wrap](https://www.npmjs.com/package/gulp-wrap/) for this purpose. Example (using Gulp)
@@ -327,7 +264,7 @@ module.factory('Service', function ($rootScope, $timeout, MyCustomDependency1, M
   }
   ```
 
-* Avoid use of `$scope` service to define functions and properties as part of controllers. Use `$scope` only if It's really needed:
+* Avoid use of `$scope` service to define functions and properties as part of controllers. Use `$scope` only if IT'S REALLY NEEDED:
     0. For publish and subscribe to events: `$scope.$emit`, `$scope.$broadcast`, and `$scope.$on`.
     0. For _watch_ values or collections: `$scope.$watch`, `$scope.$watchCollection`
 
@@ -350,7 +287,7 @@ module.factory('Service', function ($rootScope, $timeout, MyCustomDependency1, M
     vm.description = 'Some description';
 
     $http.get('/api/main/things').success(function (things) {
-        vm.things = things; // Adding 'things' as a property of the controller
+      vm.things = things; // Adding 'things' as a property of the controller
     });
   }
   ```
@@ -413,7 +350,7 @@ module.factory('Service', function ($rootScope, $timeout, MyCustomDependency1, M
   For example:
 
   ```Javascript
-  //This is a common behaviour (bad example) of using business logic inside a controller.
+  //This is a common behavior (bad example) of using business logic inside a controller.
   angular.module('Store', [])
   .controller('OrderCtrl', function () {
     var vm = this;
@@ -552,8 +489,8 @@ This section includes information about the service component in AngularJS. It i
 
     ```JavaScript
     function MainCtrl(User) {
-        var vm = this;
-        vm.user = new User('foo', 42);
+      var vm = this;
+      vm.user = new User('foo', 42);
     }
 
     module.controller('MainCtrl', MainCtrl);
@@ -575,28 +512,28 @@ This section includes information about the service component in AngularJS. It i
   // order is the 'model'
   angular.module('Store')
   .factory('order', function () {
-      var add = function (item) {
-        this.items.push (item);
-      };
+    var add = function (item) {
+      this.items.push (item);
+    };
 
-      var remove = function (item) {
-        if (this.items.indexOf(item) > -1) {
-          this.items.splice(this.items.indexOf(item), 1);
-        }
-      };
+    var remove = function (item) {
+      if (this.items.indexOf(item) > -1) {
+        this.items.splice(this.items.indexOf(item), 1);
+      }
+    };
 
-      var total = function () {
-        return this.items.reduce(function (memo, item) {
-          return memo + (item.qty * item.price);
-        }, 0);
-      };
+    var total = function () {
+      return this.items.reduce(function (memo, item) {
+        return memo + (item.qty * item.price);
+      }, 0);
+    };
 
-      return {
-        items: [],
-        addToOrder: add,
-        removeFromOrder: remove,
-        totalPrice: total
-      };
+    return {
+      items: [],
+      addToOrder: add,
+      removeFromOrder: remove,
+      totalPrice: total
+    };
   });
   ```
 
@@ -689,7 +626,7 @@ This section includes information about the service component in AngularJS. It i
 
 # i18n
 
-* For newer versions of the framework (>=1.4.0) use the built-in i18n tools, when using older versions (<1.4.0) use [`angular-translate`](https://github.com/angular-translate/angular-translate).
+* Use [`angular-translate`](https://github.com/angular-translate/angular-translate).
 
 # Performance
 

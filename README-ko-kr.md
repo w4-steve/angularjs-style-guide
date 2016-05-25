@@ -1,5 +1,7 @@
 [![https://gitter.im/mgechev/angularjs-style-guide 에서 채팅에 참여하세요.](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mgechev/angularjs-style-guide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+**TODO(steve): 업데이트 해주세요.**
+
 # 소개
 
 이 문서의 목표는 AngularJS 애플리케이션을 제작할 때 참고할 수 있는 모범 사례(best practice)와 가이드라인을 제시하는 것입니다.
@@ -525,7 +527,7 @@ module.factory('Service', function ($rootScope, $timeout, MyCustomDependency1, M
 
 * 서비스명은 camelCase나 CamelCase로 작성합니다.
 	* 생성자 함수인 서비스의 이름은 다음과 같이 UpperCamelCase (PascalCase)를 사용합니다.
-    
+
     ```JavaScript
     function MainCtrl($scope, User) {
       $scope.user = new User('foo', 42);
@@ -725,4 +727,3 @@ $scope.divStyle = {
 [<img alt="giantray" src="https://avatars.githubusercontent.com/u/5054377?v=3&s=117" width="117">](https://github.com/giantray) |[<img alt="ntaoo" src="https://avatars.githubusercontent.com/u/511213?v=3&s=117" width="117">](https://github.com/ntaoo) |[<img alt="kuzmeig1" src="https://avatars.githubusercontent.com/u/8707951?v=3&s=117" width="117">](https://github.com/kuzmeig1) |
 :---: |:---: |:---: |
 [giantray](https://github.com/giantray) |[ntaoo](https://github.com/ntaoo) |[kuzmeig1](https://github.com/kuzmeig1) |
-
